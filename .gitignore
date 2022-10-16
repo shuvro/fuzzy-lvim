@@ -28,3 +28,5 @@ lua/lv-user-config/
 *.old
 
 .luacheckcache
+.vscode/
+.idea/

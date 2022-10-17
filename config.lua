@@ -79,6 +79,7 @@ lvim.builtin.cmp.cmdline.enable = false
 -- =========================================
 local user = vim.env.USER
 if user and user == "shuvro" then
+  lvim.reload_config_on_save = true
   require("lvim.user.custom_user").config()
 end
 

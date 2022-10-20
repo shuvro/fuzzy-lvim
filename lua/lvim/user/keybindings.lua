@@ -96,7 +96,7 @@ M.set_hlslens_keymaps = function()
 end
 
 local function set_bufferline_keymaps()
-  lvim.keys.normal_mode["<S-x>"] = "<Cmd>lua require('lvim.user.bufferline').delete_buffer()<CR>"
+  lvim.keys.normal_mode["<S-x>"] = "<Cmd>lua require('bufferline').delete_buffer()<CR>"
   lvim.keys.normal_mode["<S-l>"] = "<Cmd>BufferLineCycleNext<CR>"
   lvim.keys.normal_mode["<S-h>"] = "<Cmd>BufferLineCyclePrev<CR>"
   lvim.keys.normal_mode["[b"] = "<Cmd>BufferLineMoveNext<CR>"
@@ -192,7 +192,7 @@ M.set_task_runner_keymaps = function()
   else
     lvim.builtin.which_key.mappings["m"] = "Make"
     lvim.builtin.which_key.mappings["r"] = "Run"
-    require("lvim.user.autocommands").make_run()
+    require("autocommands").make_run()
   end
 end
 
@@ -207,7 +207,7 @@ M.config = function()
   -- Additional keybindings
   -- =========================================
   lvim.keys.normal_mode["<CR>"] = {
-    "<cmd>lua require('lvim.user.neovim').maximize_current_split()<CR>",
+    "<cmd>lua require('neovim').maximize_current_split()<CR>",
     { noremap = true, silent = true, nowait = true },
   }
   lvim.keys.insert_mode["<A-a>"] = "<ESC>ggVG<CR>"
@@ -246,7 +246,7 @@ M.config = function()
   lvim.keys.visual_mode["<A-x>"] = "<C-x>"
   lvim.keys.visual_mode["p"] = [["_dP]]
   lvim.keys.visual_mode["ga"] = "<esc><Cmd>lua vim.lsp.buf.range_code_action()<CR>"
-  lvim.keys.visual_mode["<leader>st"] = "<Cmd>lua require('lvim.user.telescope').grep_string_visual()<CR>"
+  lvim.keys.visual_mode["<leader>st"] = "<Cmd>lua require('telescope').grep_string_visual()<CR>"
 
   -- WhichKey keybindings
   -- =========================================
@@ -282,17 +282,17 @@ M.config = function()
   end
   lvim.builtin.which_key.mappings["F"] = {
     name = " Find",
-    b = { "<cmd>lua require('lvim.user.telescope').builtin()<cr>", "Builtin" },
-    f = { "<cmd>lua require('lvim.user.telescope').curbuf()<cr>", "Current Buffer" },
-    g = { "<cmd>lua require('lvim.user.telescope').git_files()<cr>", "Git Files" },
-    i = { "<cmd>lua require('lvim.user.telescope').installed_plugins()<cr>", "Installed Plugins" },
+    b = { "<cmd>lua require('telescope').builtin()<cr>", "Builtin" },
+    f = { "<cmd>lua require('telescope').curbuf()<cr>", "Current Buffer" },
+    g = { "<cmd>lua require('telescope').git_files()<cr>", "Git Files" },
+    i = { "<cmd>lua require('telescope').installed_plugins()<cr>", "Installed Plugins" },
     l = {
       "<cmd>lua require('telescope.builtin').resume()<cr>",
       "Last Search",
     },
-    p = { "<cmd>lua require('lvim.user.telescope').project_search()<cr>", "Project" },
-    s = { "<cmd>lua require('lvim.user.telescope').git_status()<cr>", "Git Status" },
-    z = { "<cmd>lua require('lvim.user.telescope').search_only_certain_files()<cr>", "Certain Filetype" },
+    p = { "<cmd>lua require('telescope').project_search()<cr>", "Project" },
+    s = { "<cmd>lua require('telescope').git_status()<cr>", "Git Status" },
+    z = { "<cmd>lua require('telescope').search_only_certain_files()<cr>", "Certain Filetype" },
   }
   if lvim.builtin.legendary.active then
     lvim.builtin.which_key.mappings["C"] =
@@ -308,7 +308,7 @@ M.config = function()
   lvim.builtin.which_key.mappings.g.name = " Git"
   lvim.builtin.which_key.mappings.l.name = " LSP"
   lvim.builtin.which_key.mappings["f"] = {
-    require("lvim.user.telescope").find_project_files,
+    require("telescope").find_project_files,
     " Find File",
   }
   local ok, _ = pcall(require, "vim.diagnostic")
@@ -334,9 +334,9 @@ M.config = function()
   }
   lvim.builtin.which_key.mappings["lp"] = {
     name = "Peek",
-    d = { "<cmd>lua require('lvim.user.peek').Peek('definition')<cr>", "Definition" },
-    t = { "<cmd>lua require('lvim.user.peek').Peek('typeDefinition')<cr>", "Type Definition" },
-    i = { "<cmd>lua require('lvim.user.peek').Peek('implementation')<cr>", "Implementation" },
+    d = { "<cmd>lua require('peek').Peek('definition')<cr>", "Definition" },
+    t = { "<cmd>lua require('peek').Peek('typeDefinition')<cr>", "Type Definition" },
+    i = { "<cmd>lua require('peek').Peek('implementation')<cr>", "Implementation" },
   }
   lvim.builtin.which_key.mappings["lh"] = {
     "<cmd>hi LspReferenceRead cterm=bold ctermbg=red guibg=#24283b<cr><cmd>hi LspReferenceText cterm=bold ctermbg=red guibg=#24283b<cr><cmd>hi LspReferenceWrite cterm=bold ctermbg=red guibg=#24283b<cr>",
@@ -382,14 +382,14 @@ M.config = function()
       lvim.builtin.which_key.mappings["t"] = {
         name = "ﭧ Test",
         f = {
-          "<cmd>lua require('neotest').run.run({vim.fn.expand('%'), env=require('lvim.user.ntest').get_env()})<cr>",
+          "<cmd>lua require('neotest').run.run({vim.fn.expand('%'), env=require('ntest').get_env()})<cr>",
           "File",
         },
         o = { "<cmd>lua require('neotest').output.open({ enter = true, short = false })<cr>", "Output" },
-        r = { "<cmd>lua require('neotest').run.run({env=require('lvim.user.ntest').get_env()})<cr>", "Run" },
-        a = { "<cmd>lua require('lvim.user.ntest').run_all()<cr>", "Run All" },
-        c = { "<cmd>lua require('lvim.user.ntest').cancel()<cr>", "Cancel" },
-        R = { "<cmd>lua require('lvim.user.ntest').run_file_sync()<cr>", "Run Async" },
+        r = { "<cmd>lua require('neotest').run.run({env=require('ntest').get_env()})<cr>", "Run" },
+        a = { "<cmd>lua require('ntest').run_all()<cr>", "Run All" },
+        c = { "<cmd>lua require('ntest').cancel()<cr>", "Cancel" },
+        R = { "<cmd>lua require('ntest').run_file_sync()<cr>", "Run Async" },
         s = { "<cmd>lua require('neotest').summary.toggle()<cr>", "Summary" },
         n = { "<cmd>lua require('neotest').jump.next({ status = 'failed' })<cr>", "jump to next failed" },
         p = { "<cmd>lua require('neotest').jump.prev({ status = 'failed' })<cr>", "jump to previous failed" },

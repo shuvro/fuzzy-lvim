@@ -8,8 +8,8 @@ highlight! link LspDiagnosticsSignInfo DiagnosticInfo
 highlight! link NeoTreeDirectoryIcon NvimTreeFolderIcon
 highlight! link IndentBlanklineIndent1  @comment
 ]]
-require("user.theme").telescope_theme()
-require("user.dev_icons").define_dap_signs()
+require("lvim.user.theme").telescope_theme()
+require("lvim.user.dev_icons").define_dap_signs()
 if lvim.use_icons == false and lvim.builtin.custom_web_devicons then
-  require("user.dev_icons").set_icon()
+  require("lvim.user.dev_icons").set_icon()
 end

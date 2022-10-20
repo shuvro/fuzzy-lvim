@@ -1,5 +1,3 @@
-local M = {}
-
 M.config = function()
   local kind = require "lvim.user.lsp_kind"
 
@@ -36,6 +34,16 @@ M.config = function()
     ghost_text = false,
     native_menu = false,
     custom_menu = true,
+  }
+  local cmp_border = {
+    { "╭", "CmpBorder" },
+    { "─", "CmpBorder" },
+    { "╮", "CmpBorder" },
+    { "│", "CmpBorder" },
+    { "╯", "CmpBorder" },
+    { "─", "CmpBorder" },
+    { "╰", "CmpBorder" },
+    { "│", "CmpBorder" },
   }
   local cmp_sources = {
     ["vim-dadbod-completion"] = "(DadBod)",
